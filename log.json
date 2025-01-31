@@ -6,6 +6,13 @@
       "tags": [
         ""
       ]
+    },
+    {
+      "timestamp": "2025-01-31T08:27:46Z",
+      "message": "Test log 2",
+      "tags": [
+        ""
+      ]
     }
   ]
 }
