@@ -1,0 +1,11 @@
+{
+  "logs": [
+    {
+      "timestamp": "2025-01-31T08:27:30Z",
+      "message": "Test log",
+      "tags": [
+        ""
+      ]
+    }
+  ]
+}
