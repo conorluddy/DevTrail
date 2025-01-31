@@ -13,20 +13,33 @@ usage() {
     exit 1
 }
 
+# Initialize variables
+MESSAGE=""
+TAGS=""
+USE_YESTERDAY=false
+
 # Parse command line arguments
-while getopts ":m:t:y" opt; do
-  case $opt in
-    m) MESSAGE="$OPTARG"
-    ;;
-    t) TAGS="$OPTARG"
-    ;;
-    y) USE_YESTERDAY=true
-    ;;
-    \?) echo "Invalid option -$OPTARG" >&2
-    usage
-    ;;
-  esac
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -m)
+            shift
+            MESSAGE="$1"
+            ;;
+        -t)
+            shift
+            TAGS="$1"
+            ;;
+        -y)
+            USE_YESTERDAY=true
+            ;;
+        *)
+            echo "Unknown option: $1"
+            usage
+            ;;
+    esac
+    shift
 done
+
 
 # Check if message is provided
 if [ -z "$MESSAGE" ]; then
@@ -46,11 +59,12 @@ fi
 NEW_ENTRY=$(cat <<EOF
 {
   "timestamp": "$(echo $TIMESTAMP | sed 's/"/\\"/g')",
-  "message": $(jq -Rs . <<< "$MESSAGE"),
+  "message": $(printf '%s' "$MESSAGE" | jq -Rs .),
   "tags": [$(echo $TAGS | sed 's/[[:space:]]*,[[:space:]]*/","/g; s/^/"/; s/$/"/')]
 }
 EOF
 )
+
 
 # Initialize log file if it doesn't exist or is empty
 if [ ! -s "$LOG_FILE" ]; then
@@ -65,5 +79,6 @@ echo "Log entry added successfully!"
 
 # Git operations
 git -C "$SCRIPT_DIR" add "$LOG_FILE"
-git -C "$SCRIPT_DIR" commit -m "Log entry: $TIMESTAMP"
+git -C "$SCRIPT_DIR" commit -m "Log entry: $MESSAGE"
 git -C "$SCRIPT_DIR" push origin main
+

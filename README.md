@@ -30,7 +30,7 @@ To use this script:
 
 Save it as logger.sh in a directory of your choice.
 
-Make it executable: chmod +x logging.sh
+Make it executable: chmod +x logger.sh
 
 Set up an alias in your .bashrc or .zshrc:
 
