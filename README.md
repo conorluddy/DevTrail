@@ -21,7 +21,8 @@ Feel free to clone this and tweak it to suit your own workflow.
 - The `-t` flag is optional and can be used to add comma-separated tags. 
 - The `-y` flag is optional and will log the datetime as 6PM the previous day (for stuff you forgot).
 
-1. The script will:
+The script will:
+
 - Add a timestamped entry to the `log.json` file.
 - Commit the changes to Git.
 - Push the changes to the 'main' branch.
@@ -30,18 +31,14 @@ Feel free to clone this and tweak it to suit your own workflow.
 
 To use this script:
 
-Save it as logger.sh in a directory of your choice.
+- Save it as logger.sh in a directory of your choice.
+- Make it executable: chmod +x logger.sh
+- Set up an alias in your .bashrc or .zshrc:
 
-Make it executable: chmod +x logger.sh
-
-Set up an alias in your .bashrc or .zshrc:
-
-e.g. (you can alias it as whatever you like)
-
+(you can alias it as whatever you like)
 alias devlog='/path/to/logger.sh'
 
 Now you can use it like this:
-
 devlog -m "Implemented new feature" -t "development,feature,project-x"
 
 ## Roadmap
@@ -49,3 +46,4 @@ devlog -m "Implemented new feature" -t "development,feature,project-x"
 - Let this run in the background and prompt you for updates if it hasn't been logged to in X hours.
 - Use something like Gum to make the interface prettier.
 - Integrate with an LLM so you can query your logs from the CLI.
+- Let it work without the -m tag for quicker logging
