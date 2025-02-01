@@ -56,6 +56,13 @@
       "tags": [
         "s"
       ]
+    },
+    {
+      "timestamp": "2025-01-31T18:00:00Z",
+      "message": "test",
+      "tags": [
+        "test"
+      ]
     }
   ]
 }
