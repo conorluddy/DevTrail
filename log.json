@@ -13,6 +13,13 @@
       "tags": [
         ""
       ]
+    },
+    {
+      "timestamp": "2025-02-01T13:15:46Z",
+      "message": "test",
+      "tags": [
+        "test"
+      ]
     }
   ]
 }
