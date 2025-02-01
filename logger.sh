@@ -6,6 +6,9 @@ TARGET_DIR="/Users/conor/Development/DevTrail"
 # Log file in the target directory
 LOG_FILE="$TARGET_DIR/log.json"
 
+# Reminder settings file
+REMINDER_FILE="$TARGET_DIR/reminder_settings.json"
+
 # Colors and formatting
 BOLD='\033[1m'
 GREEN='\033[0;32m'
@@ -54,17 +57,47 @@ display_last_log() {
     echo -e "${NC}-----------------------------------${NC}"
 }
 
+# Function to send macOS notification
+send_notification() {
+    local title="$1"
+    local message="$2"
+    osascript -e "display notification \"$message\" with title \"$title\""
+}
+
+# Function to check and display reminder
+check_reminder() {
+    if [ -f "$REMINDER_FILE" ]; then
+        LAST_LOG=$(jq -r '.last_log' "$REMINDER_FILE")
+        FREQUENCY=$(jq -r '.frequency' "$REMINDER_FILE")
+        CURRENT_TIME=$(date +%s)
+        
+        # Calculate time difference
+        TIME_DIFF=$((CURRENT_TIME - LAST_LOG))
+        
+        if [ $TIME_DIFF -ge $FREQUENCY ]; then
+            send_notification "DevTrail Reminder" "It's time to log your activities!"
+        fi
+    fi
+}
+
+# Function to update last log time
+update_last_log_time() {
+    CURRENT_TIME=$(date +%s)
+    if [ -f "$REMINDER_FILE" ]; then
+        TMP_FILE=$(mktemp)
+        jq ".last_log = $CURRENT_TIME" "$REMINDER_FILE" > "$TMP_FILE" && mv "$TMP_FILE" "$REMINDER_FILE"
+    else
+        echo "{\"last_log\": $CURRENT_TIME, \"frequency\": 86400}" > "$REMINDER_FILE"
+    fi
+}
+
 # Main loop
 while true; do
     clear
     display_header
+    
+    check_reminder
     display_last_log
-
-    # Reset variables
-    MESSAGE=""
-    TAGS=""
-
-    # Prompt for log details
     prompt_for_log
 
     # Check if message is provided
@@ -105,6 +138,9 @@ EOF
     else
         echo -e "\n${RED}Error: Target directory is not a Git repository. Git operations failed.${NC}"
     fi
+
+    update_last_log_time
+    send_notification "DevTrail" "Activity logged successfully!"
 
     echo -e "${NC}-----------------------------------${NC}"
     echo -e "${YELLOW}Screen will refresh in 2 seconds...${NC}"
