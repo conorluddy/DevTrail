@@ -6,6 +6,13 @@
       "tags": [
         ""
       ]
+    },
+    {
+      "timestamp": "2025-02-01T13:37:02Z",
+      "message": "Today I worked on this logger",
+      "tags": [
+        "logger"
+      ]
     }
   ]
 }
