@@ -77,6 +77,14 @@
       "tags": [
         "test"
       ]
+    },
+    {
+      "timestamp": "2025-02-01T13:33:12Z",
+      "message": "Test",
+      "tags": [
+        "adf sadf",
+        ""
+      ]
     }
   ]
 }
