@@ -2,7 +2,8 @@
 
 This is a simple CLI tool I use for logging work from the terminal throughout the workday. When you're juggling a lot of tasks it can be easy to forget all of the things you've worked on. I find this approach one of the quickest ways to track work/ideas/thoughts/todos etc.
 
-![Kapture 2025-01-31 at 08 16 20](https://github.com/user-attachments/assets/f2e179e6-b13e-40f1-9185-9d781233c6b0)
+![Kapture 2025-02-01 at 13 37 08](https://github.com/user-attachments/assets/e35757dc-1f55-4181-805d-ebd25b2700c5)
+
 
 Logs get committed to the git repo automatically when you create them so I'd recommend keeping your cloned repo private.
 
