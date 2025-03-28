@@ -4,7 +4,6 @@ This is a simple CLI tool I use for logging work from the terminal throughout th
 
 ![Kapture 2025-02-01 at 13 37 08](https://github.com/user-attachments/assets/e35757dc-1f55-4181-805d-ebd25b2700c5)
 
-
 Logs get committed to the git repo automatically when you create them so I'd recommend keeping your cloned repo private.
 
 Feel free to clone this and tweak it to suit your own workflow.
@@ -16,10 +15,10 @@ Feel free to clone this and tweak it to suit your own workflow.
 - Automatically timestamp entries
 - Store logs in a structured JSON format
 - Keep a Git history of your logs
-- Use the JSON for later use in a UI or LLM 
+- Use the JSON for later use in a UI or LLM
 
 - The `-m` flag is required and is used to specify your log message.
-- The `-t` flag is optional and can be used to add comma-separated tags. 
+- The `-t` flag is optional and can be used to add comma-separated tags.
 - The `-y` flag is optional and will log the datetime as 6PM the previous day (for stuff you forgot).
 
 The script will:
@@ -48,3 +47,7 @@ devlog -m "Implemented new feature" -t "development,feature,project-x"
 - Use something like Gum to make the interface prettier.
 - Integrate with an LLM so you can query your logs from the CLI.
 - Let it work without the -m tag for quicker logging
+
+## PS
+
+- I've also dumped two Python scripts in here that let you log your github PR/commits/comments to JSON so you can run them though an LLM and summarise them.
